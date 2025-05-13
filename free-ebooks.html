@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free eBooks - Bibliophile Hub</title>
+    <meta name="description" content="Browse and download free eBooks from our collection. No registration required for these complimentary titles.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book-animation.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                
+                <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="topics.html">Topics</a>
+                    <a href="free-ebooks.html" class="active">Free eBooks</a>
+                    <a href="donation.html">Donate</a>
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="register.html" class="membership-btn btn">Join Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Free eBooks</h1>
+            <p>Download these titles without any registration or payment</p>
+        </div>
+    </div>
+    
+    <!-- Book Details Container (shown when a specific book is selected) -->
+    <div class="book-details-container container" style="margin-top: 40px; display: none;">
+        <!-- Book details will be loaded via JavaScript when a book is selected -->
+    </div>
+    
+    <!-- Filter Section -->
+    <section class="section" style="padding-top: 40px; padding-bottom: 20px;">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-row free-topics-list">
+                    <button class="filter-btn active" data-filter="all">All Topics</button>
+                    <button class="filter-btn" data-filter="Fiction">Fiction</button>
+                    <button class="filter-btn" data-filter="Romance">Romance</button>
+                    <button class="filter-btn" data-filter="Self-Help">Self-Help</button>
+                    <button class="filter-btn" data-filter="History">History</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search free books...">
+                    <button class="search-btn btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Free Books Section -->
+    <section class="section">
+        <div class="container">
+            <div class="free-books-container book-grid">
+                <!-- Free books will be loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Book Reading Tips -->
+    <section class="section" style="background-color: var(--light-beige);">
+        <div class="container">
+            <h2 class="section-title">eBook Reading Tips</h2>
+            
+            <div class="tips-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div class="tip-card" style="background: var(--white); border-radius: var(--border-radius); padding: 25px; box-shadow: var(--card-shadow);">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <div style="font-size: 1.8rem; color: var(--accent);">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 10px;">Mobile Reading</h3>
+                            <p>Use dedicated eBook reader apps like Kindle, Kobo, or Google Play Books on your smartphone for the best reading experience.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-card" style="background: var(--white); border-radius: var(--border-radius); padding: 25px; box-shadow: var(--card-shadow);">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <div style="font-size: 1.8rem; color: var(--accent);">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 10px;">Eye Comfort</h3>
+                            <p>Enable night mode or sepia theme in your reading app during evening hours to reduce eye strain and improve sleep quality.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-card" style="background: var(--white); border-radius: var(--border-radius); padding: 25px; box-shadow: var(--card-shadow);">
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <div style="font-size: 1.8rem; color: var(--accent);">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 10px;">ePub vs PDF</h3>
+                            <p>ePub format offers reflowable text that adapts to your screen size, while PDF preserves exact page layouts but may require zooming on smaller devices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Premium Books CTA -->
+    <section class="section">
+        <div class="container">
+            <div style="display: flex; align-items: center; gap: 40px; background: var(--light); border-radius: var(--border-radius); padding: 40px; box-shadow: var(--card-shadow);">
+                <div style="flex: 2;">
+                    <h2 style="margin-bottom: 15px;">Want More Books?</h2>
+                    <p style="margin-bottom: 25px;">Our premium collection includes over 1,500 additional titles across all genres. Make a small donation to unlock lifetime access to these exclusive eBooks.</p>
+                    <a href="donation.html" class="btn btn-premium">Unlock Premium Books</a>
+                </div>
+                <div style="flex: 1; text-align: right;" class="book-animation">
+                    <div class="book-card">
+                        <div class="mini-book">
+                            <div class="mini-book-cover" style="background-image: url('https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Bibliophile Hub</div>
+                    <p class="footer-about">A digital sanctuary for book lovers, offering thousands of eBooks and ePubs with tools to enhance your reading experience.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="authors.html">Browse by Author</a></li>
+                        <li><a href="topics.html">Browse by Topic</a></li>
+                        <li><a href="free-ebooks.html">Free eBooks</a></li>
+                        <li><a href="donation.html">Premium Collection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">How to Download</a></li>
+                        <li><a href="#">Reading Devices</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Copyright Notice</a></li>
+                        <li><a href="#">Donation Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Bibliophile Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

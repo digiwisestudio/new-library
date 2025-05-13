@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Bibliophile Hub</title>
+    <meta name="description" content="Join Bibliophile Hub to access thousands of eBooks, track your reading progress, and unlock premium content.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book-animation.css">
+    <style>
+        .auth-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(166, 123, 91, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+        
+        .auth-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+        
+        .terms {
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #555;
+            text-align: center;
+        }
+        
+        .terms a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        .membership-options {
+            margin: 30px 0;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .membership-option {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+        }
+        
+        .membership-option:last-child {
+            border-bottom: none;
+        }
+        
+        .membership-option input {
+            margin-right: 15px;
+        }
+        
+        .option-details {
+            flex: 1;
+        }
+        
+        .option-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+        
+        .option-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .option-price {
+            font-weight: 600;
+            color: var(--accent);
+        }
+  
+        
+        .form-feedback {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            min-height: 20px;
+            color: #e74c3c;
+        }
+        
+        .form-control.is-invalid {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+        }
+        
+        .form-control.is-valid {
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+        }
+        
+        .password-strength {
+            margin-top: 8px;
+        }
+        
+        .strength-meter {
+            height: 4px;
+            background-color: #ddd;
+            border-radius: 2px;
+            position: relative;
+            margin-bottom: 5px;
+        }
+        
+        .strength-meter-fill {
+            height: 100%;
+            border-radius: 2px;
+            width: 0;
+            transition: width 0.3s, background-color 0.3s;
+        }
+        
+        .strength-text {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        .very-weak .strength-meter-fill {
+            width: 20%;
+            background-color: #e74c3c;
+        }
+        
+        .weak .strength-meter-fill {
+            width: 40%;
+            background-color: #e67e22;
+        }
+        
+        .medium .strength-meter-fill {
+            width: 60%;
+            background-color: #f1c40f;
+        }
+        
+        .strong .strength-meter-fill {
+            width: 80%;
+            background-color: #3498db;
+        }
+        
+        .very-strong .strength-meter-fill {
+            width: 100%;
+            background-color: #2ecc71;
+        }
+        
+        .very-weak .strength-text {
+            color: #e74c3c;
+        }
+        
+        .weak .strength-text {
+            color: #e67e22;
+        }
+        
+        .medium .strength-text {
+            color: #f1c40f;
+        }
+        
+        .strong .strength-text {
+            color: #3498db;
+        }
+        
+        .very-strong .strength-text {
+            color: #2ecc71;
+        }
+        
+        .register-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+        
+        .register-status.error {
+            display: block;
+            background-color: #fde9e9;
+            color: #e74c3c;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .register-status.success {
+            display: block;
+            background-color: #d4edda;
+            color: #28a745;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .decorative-books {
+            position: absolute;
+            top: 320px;
+            left: -100px;
+            transform: rotate(-15deg);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .decorative-books-right {
+            position: absolute;
+            top: 120px;
+            right: -120px;
+            transform: rotate(10deg) scale(0.7);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                margin: 40px 20px;
+                padding: 30px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .decorative-books, .decorative-books-right {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                
+                <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="topics.html">Topics</a>
+                    <a href="free-ebooks.html">Free eBooks</a>
+                    <a href="donation.html">Donate</a>
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="register.html" class="membership-btn btn active">Join Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Register Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Create Your Account</h1>
+                <p>Join our community of book lovers and gain access to thousands of eBooks</p>
+            </div>
+              <form id="register-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" class="form-control" placeholder="Enter your first name" required>
+                        <div class="form-feedback"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" class="form-control" placeholder="Enter your last name" required>
+                        <div class="form-feedback"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    <div class="form-feedback"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Create a password (min. 8 characters)" required minlength="8">
+                    <div class="form-feedback"></div>
+                    <div class="password-strength" id="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-meter-fill" id="strength-meter-fill"></div>
+                        </div>
+                        <div class="strength-text" id="strength-text">Password strength</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" required minlength="8">
+                    <div class="form-feedback"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Membership Type</label>
+                    <div class="membership-options">
+                        <div class="membership-option">
+                            <input type="radio" id="free-membership" name="membership" value="free" checked>
+                            <div class="option-details">
+                                <div class="option-name">Free Membership</div>
+                                <div class="option-desc">Access to all free eBooks and basic features</div>
+                            </div>
+                            <div class="option-price">₱0.00</div>
+                        </div>
+                        
+                        <div class="membership-option">
+                            <input type="radio" id="standard-membership" name="membership" value="standard">
+                            <div class="option-details">
+                                <div class="option-name">Standard Membership</div>
+                                <div class="option-desc">Access premium eBooks and advanced features</div>
+                            </div>
+                            <div class="option-price">₱199.00/month</div>
+                        </div>
+                        
+                        <div class="membership-option">
+                            <input type="radio" id="premium-membership" name="membership" value="premium">
+                            <div class="option-details">
+                                <div class="option-name">Premium Membership</div>
+                                <div class="option-desc">Full library access, unlimited downloads, early releases</div>
+                            </div>
+                            <div class="option-price">₱499.00/month</div>
+                        </div>
+                    </div>
+                </div>
+                  <p class="terms">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                
+                <!-- Registration status message area -->
+                <div id="registration-status" class="register-status"></div>
+                
+                <button type="submit" id="register-button" class="btn auth-btn">Create Account</button>
+            </form>
+  
+            
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+        </div>
+        
+        <!-- Decorative book stacks -->
+        <div class="decorative-books">
+            <div class="book-stack" style="transform: scale(0.8);">
+                <div class="stacked-book"></div>
+                <div class="stacked-book"></div>
+                <div class="stacked-book"></div>
+            </div>
+        </div>
+        
+        <div class="decorative-books-right">
+            <div class="book-container">
+                <div class="book">
+                    <span class="shadow"></span>
+                    <div class="back"></div>
+                    <div class="cover-end"></div>
+                    <div class="page last">
+                        <button class="btn-tale">Join us</button>
+                    </div>
+                    <div class="page third"></div>
+                    <div class="page second"></div>
+                    <div class="page first"></div>
+                    <div class="cover">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg" alt="Book Cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <h3>Bibliophile Hub</h3>
+                    <p>Your digital sanctuary for literary exploration</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="authors.html">Authors</a>
+                        <a href="topics.html">Topics</a>
+                        <a href="free-ebooks.html">Free eBooks</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Account</h4>
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Sign Up</a>
+                        <a href="#">My Collection</a>
+                        <a href="#">Reading History</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <a href="donation.html">Make a Donation</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bibliophile Hub. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+      <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        // Initialize auth system when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initAuth();
+            
+            // Setup password toggle functionality for register page if not handled by auth.js
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirm-password');
+            
+            if (passwordField && !document.getElementById('password-toggle')) {
+                // Create password toggle button for main password
+                const passwordToggle = document.createElement('button');
+                passwordToggle.type = 'button';
+                passwordToggle.id = 'password-toggle';
+                passwordToggle.style = 'position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer;';
+                passwordToggle.innerHTML = '<i class="far fa-eye" id="password-toggle-icon"></i>';
+                
+                // Add button to DOM
+                const passwordContainer = passwordField.parentNode;
+                passwordContainer.style.position = 'relative';
+                passwordContainer.appendChild(passwordToggle);
+                
+                // Add click event
+                passwordToggle.addEventListener('click', function() {
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                        passwordToggle.querySelector('i').classList.replace('fa-eye', 'fa-eye-slash');
+                    } else {
+                        passwordField.type = 'password';
+                        passwordToggle.querySelector('i').classList.replace('fa-eye-slash', 'fa-eye');
+                    }
+                });
+                
+                // Create password toggle for confirmation field
+                const confirmToggle = document.createElement('button');
+                confirmToggle.type = 'button';
+                confirmToggle.id = 'confirm-toggle';
+                confirmToggle.style = 'position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer;';
+                confirmToggle.innerHTML = '<i class="far fa-eye" id="confirm-toggle-icon"></i>';
+                
+                // Add button to DOM
+                const confirmContainer = confirmPasswordField.parentNode;
+                confirmContainer.style.position = 'relative';
+                confirmContainer.appendChild(confirmToggle);
+                
+                // Add click event
+                confirmToggle.addEventListener('click', function() {
+                    if (confirmPasswordField.type === 'password') {
+                        confirmPasswordField.type = 'text';
+                        confirmToggle.querySelector('i').classList.replace('fa-eye', 'fa-eye-slash');
+                    } else {
+                        confirmPasswordField.type = 'password';
+                        confirmToggle.querySelector('i').classList.replace('fa-eye-slash', 'fa-eye');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

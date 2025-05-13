@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+:root {
+  --dark-color: gray;
+  --subtle-color: rgb(208, 213, 213);
+  --main-color: rgb(249, 255, 255);
+  --accent-color: #D2B48C;
+}
+
+.book-animation img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 2px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.book-animation button:hover {
+  cursor: pointer;
+}
+
+.book-container {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+  perspective: 500px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.book {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.shadow {
+  position: absolute;
+  bottom: 0;
+  width: 160px;
+  box-shadow: 0 8px 16px 8px var(--dark-color);
+  transform: rotateY(-10deg);
+}
+
+.book > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  transition: transform 2s;
+}
+
+.cover {
+  transform: scaleY(1.05) rotateY(-10deg);
+  border: 1px solid var(--dark-color);
+  z-index: 5;
+  overflow: hidden;
+}
+
+.cover-end {
+  transform: translateX(10px) rotateY(-10deg);
+  border: 1px solid var(--dark-color);
+  z-index: 4;
+}
+
+.back {
+  height: 200px;
+  width: 10px;
+  background-color: var(--subtle-color);
+}
+
+.back::after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255,255,255,0.1);
+  box-shadow: 0 40px 0 rgba(255,255,255,0.1), 0 80px 0 rgba(255,255,255,0.1), 0 120px 0 rgba(255,255,255,0.1);
+}
+
+.page {
+  background: linear-gradient(to right, var(--subtle-color), 20%, var(--main-color));
+  border: 1px solid var(--subtle-color);
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 15px,
+    rgba(0, 0, 0, 0.01) 15px,
+    rgba(0, 0, 0, 0.01) 16px
+  );
+}
+
+.page.first {
+  transform: translateX(2px) rotateY(-10deg);
+  z-index: 3;
+}
+
+.page.second {
+  transform: translateX(4px) rotateY(-10deg);
+  z-index: 2;
+}
+
+.page.third {
+  transform: translateX(6px) rotateY(-10deg);
+  z-index: 1;
+}
+
+.page.last {
+  transform: translateX(8px) rotateY(-10deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, var(--subtle-color), 20%, var(--main-color));
+  z-index: 0;
+  cursor: pointer;
+}
+
+.btn-tale {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-family: "Dancing Script", cursive;
+  transition: opacity 1s, color 0.3s;
+  color: var(--dark-color);
+  text-decoration: none !important;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-tale:hover {
+  opacity: 70%;
+  text-decoration: none !important;
+  color: #000;
+}
+
+.book:hover .cover {
+  transform: rotateY(-150deg);
+}
+
+.book:hover .page.first {
+  transform: translateX(2px) rotateY(-150deg);
+  transition-delay: 0.05s;
+}
+
+.book:hover .page.second {
+  transform: translateX(4px) rotateY(-130deg);
+  transition-delay: 0.1s;
+}
+
+.book:hover .page.third {
+  transform: translateX(6px) rotateY(-110deg);
+  transition-delay: 0.15s;
+}
+
+/* The last page stays in place and doesn't flip open */
+.book:hover .page.last {
+  transform: translateX(8px) rotateY(-10deg);
+}
+
+/* Featured Book Animation */
+.featured-book {
+  margin: 30px auto;
+}
+
+.featured-book .book {
+  margin: 0 auto;
+}
+
+/* Book Card Animations */
+.book-card {
+  position: relative;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.book-card .book-container {
+  margin: 0 auto 20px;
+}
+
+.book-card .book {
+  margin: 0 auto;
+}
+
+.book-card .btn-tale {
+  font-size: 1.2rem;
+  padding: 10px;
+  width: 90%;
+}
+
+/* Book Stack Animation */
+.book-stack {
+  position: relative;
+  height: 200px;
+  width: 150px;
+  margin: 30px auto;
+}
+
+.book-stack .stacked-book {
+  position: absolute;
+  width: 150px;
+  height: 30px;
+  background: var(--subtle-color);
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.book-stack .stacked-book:nth-child(1) {
+  bottom: 0;
+  background-color: var(--accent-color);
+  z-index: 1;
+}
+
+.book-stack .stacked-book:nth-child(2) {
+  bottom: 30px;
+  background-color: var(--main-color);
+  z-index: 2;
+}
+
+.book-stack .stacked-book:nth-child(3) {
+  bottom: 60px;
+  background-color: var(--subtle-color);
+  z-index: 3;
+}
+
+.book-stack:hover .stacked-book:nth-child(1) {
+  transform: translateX(-10px) rotateZ(-2deg);
+}
+
+.book-stack:hover .stacked-book:nth-child(2) {
+  transform: translateX(5px) rotateZ(1deg);
+}
+
+.book-stack:hover .stacked-book:nth-child(3) {
+  transform: translateX(-7px) rotateZ(-1deg);
+}
+
+/* Add to List Button */
+.add-to-list-btn {
+  margin-top: 10px;
+  background-color: #5D4E3F !important;
+}
+
+.add-to-list-btn:hover {
+  background-color: #8B7D6B !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .book-container {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .book {
+    width: 120px;
+    height: 160px;
+  }
+  
+  .back {
+    height: 160px;
+  }
+  
+  .btn-tale {
+    font-size: 1.2rem;
+  }
+  
+  .page.first {
+    transform: translateX(1.6px) rotateY(-10deg);
+  }
+  
+  .page.second {
+    transform: translateX(3.2px) rotateY(-10deg);
+  }
+  
+  .page.third {
+    transform: translateX(4.8px) rotateY(-10deg);
+  }
+  
+  .page.last {
+    transform: translateX(6.4px) rotateY(-10deg);
+  }
+    .book:hover .page.first {
+    transform: translateX(1.6px) rotateY(-150deg);
+    transition-delay: 0.05s;
+  }
+  
+  .book:hover .page.second {
+    transform: translateX(3.2px) rotateY(-130deg);
+    transition-delay: 0.1s;
+  }
+  .book:hover .page.third {
+    transform: translateX(4.8px) rotateY(-110deg);
+    transition-delay: 0.15s;
+  }
+  
+  .book:hover .page.last {
+    transform: translateX(6.4px) rotateY(-10deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .book-container {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .book {
+    width: 100px;
+    height: 140px;
+  }
+  
+  .back {
+    height: 140px;
+    width: 8px;
+  }
+  
+  .btn-tale {
+    font-size: 1rem;
+  }
+  
+  .page.first {
+    transform: translateX(1.5px) rotateY(-10deg);
+  }
+  
+  .page.second {
+    transform: translateX(3px) rotateY(-10deg);
+  }
+  
+  .page.third {
+    transform: translateX(4.5px) rotateY(-10deg);
+  }
+  
+  .page.last {
+    transform: translateX(6px) rotateY(-10deg);
+  }
+    .book:hover .page.first {
+    transform: translateX(1.5px) rotateY(-150deg);
+    transition-delay: 0.05s;
+  }
+  
+  .book:hover .page.second {
+    transform: translateX(3px) rotateY(-130deg);
+    transition-delay: 0.1s;
+  }
+  .book:hover .page.third {
+    transform: translateX(4.5px) rotateY(-110deg);
+    transition-delay: 0.15s;
+  }
+  
+  .book:hover .page.last {
+    transform: translateX(6px) rotateY(-10deg);
+  }
+}

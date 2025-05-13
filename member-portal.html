@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Portal - Bibliophile Hub</title>
+    <meta name="description" content="Access your personalized member features including reading lists, notes, quotes, and journal entries.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book-animation.css">
+    <link rel="stylesheet" href="css/member-portal.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                
+                <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="topics.html">Topics</a>
+                    <a href="free-ebooks.html">Free eBooks</a>
+                    <a href="donation.html">Donate</a>
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="member-portal.html" class="membership-btn btn active">My Portal</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Member Portal Section -->
+    <section class="member-portal">
+        <div class="container">
+            <!-- Access Control - Only visible if logged in -->
+            <div id="member-login-required" class="auth-message">
+                <div class="auth-container">
+                    <div class="auth-header">
+                        <h1><i class="fas fa-lock"></i> Members Only</h1>
+                        <p>Please log in to access your member portal.</p>
+                    </div>
+                    <div class="auth-actions">
+                        <a href="login.html" class="btn">Login</a>
+                        <a href="register.html" class="btn btn-outline">Register</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member Portal Content - Only visible if logged in -->
+            <div id="member-portal-content" class="hidden">
+                <!-- Welcome Area -->
+                <div class="portal-header">
+                    <div class="welcome-container">
+                        <div class="user-avatar">
+                            <div class="avatar-image" id="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <button id="change-avatar-btn" class="avatar-change-btn">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <div class="welcome-details">
+                            <h1>Welcome, <span id="user-name">Bookworm</span>!</h1>
+                            <div class="membership-badge" id="membership-badge">
+                                <i class="fas fa-award"></i> <span id="membership-level">Standard</span> Member
+                            </div>
+                            <div class="reading-streak">
+                                <i class="fas fa-fire"></i> <span id="streak-days">0</span> Day Reading Streak
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portal-actions">
+                        <div class="theme-switcher">
+                            <span>Theme:</span>
+                            <button class="theme-btn active" data-theme="light">
+                                <i class="fas fa-sun"></i>
+                            </button>
+                            <button class="theme-btn" data-theme="dark">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                            <button class="theme-btn" data-theme="sepia">
+                                <i class="fas fa-scroll"></i>
+                            </button>
+                        </div>
+                        <button id="notification-settings-btn" class="btn btn-outline btn-sm">
+                            <i class="fas fa-bell"></i> Notifications
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Portal Dashboard Grid -->
+                <div class="portal-dashboard">
+                    <!-- Daily Quote Section -->
+                    <div class="dashboard-card daily-quote-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-quote-left"></i> Daily Quote</h2>
+                            <div class="card-actions">
+                                <button id="refresh-quote-btn" class="btn-icon" title="New Quote">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                                <button id="save-quote-btn" class="btn-icon" title="Save Quote">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="quote-content">
+                            <blockquote id="daily-quote">
+                                <p>The more that you read, the more things you will know. The more that you learn, the more places you'll go.</p>
+                                <cite>— Dr. Seuss</cite>
+                            </blockquote>
+                        </div>
+                        <div class="quote-actions">
+                            <button class="btn btn-sm" id="share-quote-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                            <a href="#" class="btn btn-sm btn-outline" id="view-saved-quotes-btn">
+                                View Saved Quotes
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Reading List Section -->
+                    <div class="dashboard-card reading-list-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-book-reader"></i> Reading List</h2>
+                            <div class="card-actions">
+                                <button id="add-book-btn" class="btn-icon" title="Add Book">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reading-list" id="reading-list-container">
+                            <div class="empty-list-message" id="empty-reading-list">
+                                <i class="fas fa-book"></i>
+                                <p>Your reading list is empty. Add books from our library to keep track of what you want to read next.</p>
+                            </div>
+                            <!-- Reading list items will be inserted here -->
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-outline" id="set-reminder-btn">
+                                <i class="fas fa-bell"></i> Set Reading Reminder
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes Editor -->
+                    <div class="dashboard-card notes-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+                            <div class="card-actions">
+                                <button id="create-note-btn" class="btn-icon" title="Create New Note">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button id="organize-notes-btn" class="btn-icon" title="Organize Notes">
+                                    <i class="fas fa-folder"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notes-container">
+                            <div class="notes-sidebar" id="notes-sidebar">
+                                <div class="note-search">
+                                    <input type="text" placeholder="Search notes..." id="note-search-input">
+                                </div>
+                                <div class="note-list" id="note-list">
+                                    <!-- Note items will be inserted here -->
+                                    <div class="empty-notes-message" id="empty-notes">
+                                        <i class="fas fa-sticky-note"></i>
+                                        <p>No notes yet. Create your first note to start capturing your thoughts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="note-editor">
+                                <div class="editor-toolbar" id="note-toolbar">
+                                    <button class="tool-btn" data-format="bold">
+                                        <i class="fas fa-bold"></i>
+                                    </button>
+                                    <button class="tool-btn" data-format="italic">
+                                        <i class="fas fa-italic"></i>
+                                    </button>
+                                    <button class="tool-btn" data-format="underline">
+                                        <i class="fas fa-underline"></i>
+                                    </button>
+                                    <button class="tool-btn" data-format="heading">
+                                        <i class="fas fa-heading"></i>
+                                    </button>
+                                    <button class="tool-btn" data-format="list-ul">
+                                        <i class="fas fa-list-ul"></i>
+                                    </button>
+                                    <button class="tool-btn" data-format="list-ol">
+                                        <i class="fas fa-list-ol"></i>
+                                    </button>
+                                </div>
+                                <div class="editor-content">
+                                    <div contenteditable="true" id="note-content" class="note-content-area" placeholder="Start writing your note here..."></div>
+                                </div>
+                                <div class="editor-footer">
+                                    <button id="save-note-btn" class="btn btn-sm">
+                                        <i class="fas fa-save"></i> Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reading Journal -->
+                    <div class="dashboard-card journal-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-journal-whills"></i> Reading Journal</h2>
+                            <div class="card-actions">
+                                <button id="new-entry-btn" class="btn-icon" title="New Journal Entry">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="journal-container">
+                            <div class="journal-sidebar">
+                                <div class="journal-calendar" id="journal-calendar">
+                                    <!-- Calendar will be dynamically generated -->
+                                </div>
+                                <div class="journal-filters">
+                                    <h3>Mood Filters</h3>
+                                    <div class="mood-tags">
+                                        <span class="mood-tag" data-mood="inspired">
+                                            <i class="fas fa-lightbulb"></i> Inspired
+                                        </span>
+                                        <span class="mood-tag" data-mood="reflective">
+                                            <i class="fas fa-brain"></i> Reflective
+                                        </span>
+                                        <span class="mood-tag" data-mood="excited">
+                                            <i class="fas fa-bolt"></i> Excited
+                                        </span>
+                                        <span class="mood-tag" data-mood="calm">
+                                            <i class="fas fa-water"></i> Calm
+                                        </span>
+                                        <span class="mood-tag" data-mood="confused">
+                                            <i class="fas fa-question"></i> Confused
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="journal-content">
+                                <div class="journal-prompt" id="journal-prompt">
+                                    <p><i class="fas fa-feather-alt"></i> <span id="prompt-text">How did today's reading connect to your personal experiences?</span></p>
+                                </div>
+                                <div class="journal-editor">
+                                    <textarea id="journal-text" placeholder="Begin your journal entry here..."></textarea>
+                                </div>
+                                <div class="journal-footer">
+                                    <div class="journal-mood-selector">
+                                        <label>How did reading make you feel today?</label>
+                                        <div class="mood-selector" id="mood-selector">
+                                            <span class="mood-icon" data-mood="inspired" title="Inspired">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            <span class="mood-icon" data-mood="reflective" title="Reflective">
+                                                <i class="fas fa-brain"></i>
+                                            </span>
+                                            <span class="mood-icon" data-mood="excited" title="Excited">
+                                                <i class="fas fa-bolt"></i>
+                                            </span>
+                                            <span class="mood-icon" data-mood="calm" title="Calm">
+                                                <i class="fas fa-water"></i>
+                                            </span>
+                                            <span class="mood-icon" data-mood="confused" title="Confused">
+                                                <i class="fas fa-question"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button id="save-journal-btn" class="btn btn-sm">
+                                        <i class="fas fa-save"></i> Save Entry
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Downloaded Books Section -->
+                    <div class="dashboard-card downloads-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-download"></i> Downloaded Books</h2>
+                            <div class="card-actions">
+                                <button id="filter-downloads-btn" class="btn-icon" title="Filter Downloads">
+                                    <i class="fas fa-filter"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="downloads-list" id="downloads-container">
+                            <div class="empty-list-message" id="empty-downloads">
+                                <i class="fas fa-cloud-download-alt"></i>
+                                <p>You haven't downloaded any books yet. Explore our library to find your first download.</p>
+                            </div>
+                            <!-- Downloaded books will be inserted here -->
+                        </div>
+                        <div class="card-footer">
+                            <a href="free-ebooks.html" class="btn btn-sm">
+                                <i class="fas fa-book"></i> Browse Library
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modals -->
+                <div id="avatar-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Choose Avatar</h2>
+                        <div class="avatar-grid">
+                            <div class="avatar-option" data-avatar="default">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="avatar-option" data-avatar="reader">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class="avatar-option" data-avatar="scholar">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="avatar-option" data-avatar="writer">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div class="avatar-option" data-avatar="bookworm">
+                                <i class="fas fa-glasses"></i>
+                            </div>
+                            <div class="avatar-option" data-avatar="wizard">
+                                <i class="fas fa-hat-wizard"></i>
+                            </div>
+                        </div>
+                        <button id="save-avatar-btn" class="btn">
+                            Save Choice
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="reminder-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Set Reading Reminder</h2>
+                        <form id="reminder-form">
+                            <div class="form-group">
+                                <label for="reminder-book">Select Book:</label>
+                                <select id="reminder-book" class="form-control" required>
+                                    <!-- Book options will be dynamically populated -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="reminder-time">Reminder Time:</label>
+                                <input type="time" id="reminder-time" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reminder-days">Days:</label>
+                                <div class="day-selection">
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-mon" value="monday">
+                                        <label for="day-mon">Mon</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-tue" value="tuesday">
+                                        <label for="day-tue">Tue</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-wed" value="wednesday">
+                                        <label for="day-wed">Wed</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-thu" value="thursday">
+                                        <label for="day-thu">Thu</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-fri" value="friday">
+                                        <label for="day-fri">Fri</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-sat" value="saturday">
+                                        <label for="day-sat">Sat</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-sun" value="sunday">
+                                        <label for="day-sun">Sun</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn">
+                                Save Reminder
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="saved-quotes-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Your Favorite Quotes</h2>
+                        <div id="saved-quotes-list" class="saved-quotes-container">
+                            <!-- Saved quotes will be inserted here -->
+                            <div class="empty-quotes-message" id="empty-quotes">
+                                <i class="fas fa-quote-right"></i>
+                                <p>You haven't saved any quotes yet. Press the heart icon on quotes you love to save them here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Navigation</h3>
+                        <a href="index.html">Home</a>
+                        <a href="authors.html">Authors</a>
+                        <a href="topics.html">Topics</a>
+                        <a href="free-ebooks.html">Free eBooks</a>
+                        <a href="donation.html">Donate</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Account</h3>
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                        <a href="member-portal.html">Member Portal</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Connect</h3>
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bibliophile Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+      <!-- JavaScript Files -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/member-portal.js"></script>
+</body>
+</html>
