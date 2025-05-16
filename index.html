@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliophile Hub - Digital Library for Book Lovers</title>
+    <meta name="description" content="Browse through thousands of eBooks and ePubs. Free downloads available or donate to access premium content.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">      <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book-animation.css">
+      <!-- Custom JavaScript -->
+      <script>
+        // Direct download helper function
+        function downloadBook(event, bookId) {
+            console.log('Direct download initiated for book ID:', bookId);
+            
+            // For Google Drive links, we need to force the download
+            // The link already has the correct format with export=download parameter
+            
+            // Find the book in our books array from data.js
+            if (typeof books !== 'undefined') {
+                const book = books.find(b => b.id === parseInt(bookId));
+                if (book) {
+                    console.log('Found book:', book.title);
+                    
+                    // Track the download if we have the function available
+                    if (typeof updateDownloadStats === 'function') {
+                        setTimeout(() => {
+                            updateDownloadStats(book);
+                        }, 1000);
+                    }
+                }
+            } else {
+                console.log('Books data not loaded yet. Using direct link only.');
+            }
+            
+            // Continue with the default link behavior
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                
+                <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="topics.html">Topics</a>
+                    <a href="free-ebooks.html">Free eBooks</a>
+                    <a href="donation.html">Donate</a>
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="register.html" class="membership-btn btn">Join Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="decorative-pattern"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Discover a World of Knowledge</h1>
+                    <p>Bibliophile Hub offers a collection of over 1,800 eBooks and ePubs across various topics. Begin your reading journey with free downloads, or donate to unlock premium content.</p>
+                    <div class="hero-cta">
+                        <a href="#featured-books" class="btn">Browse Library</a>
+                        <a href="donation.html" class="btn btn-outline">Support Us</a>
+                    </div>
+                </div>                <div class="hero-image">
+                    <!-- Book Animation -->
+                    <div class="book-animation featured-book">
+                        <div class="book-container">
+                            <div class="book">
+                                <span class="shadow"></span>
+                                <div class="back"></div>
+                                <div class="cover-end"></div>                                <div class="page last">
+                                    <a href="https://drive.google.com/uc?export=download&id=1jElN1UNxOJq29HrlH8bgMs7HAbgmA7RT" download="To Kill a Mockingbird.epub" class="btn-tale download-btn" data-id="1" onclick="return downloadBook(event, 1)">Download</a>
+                                </div>
+                                <div class="page third"></div>
+                                <div class="page second"></div>
+                                <div class="page first"></div>
+                                <div class="cover">
+                                    <img src="https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg" alt="To Kill a Mockingbird">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section class="how-it-works section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Browse</h3>
+                    <p>Explore our extensive collection by author, topic, or browse free eBooks available for immediate download.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Donate</h3>
+                    <p>Support our library with GCash donations to help maintain the service and unlock premium eBooks.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Download</h3>
+                    <p>Get instant access to your chosen books in ePub or PDF format, ready to read on your favorite device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Books Section -->
+    <section id="featured-books" class="featured-books section">
+        <div class="container">
+            <h2 class="section-title">Featured eBooks</h2>
+            
+            <div class="featured-books-container book-grid">
+                <!-- Books will be loaded via JavaScript -->
+            </div>
+            
+            <div class="section-footer" style="text-align: center; margin-top: 40px;">
+                <a href="free-ebooks.html" class="btn">View All Free eBooks</a>
+                <a href="donation.html" class="btn btn-premium">Unlock Premium Collection</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Donation Section -->
+    <section class="donation-section section">
+        <div class="container">
+            <div class="donation-container">
+                <div class="donation-text">
+                    <h2>Support Our Library</h2>
+                    <p>Bibliophile Hub is maintained through the generosity of our donors. Your contribution helps us continue providing high-quality eBooks and develop new features.</p>
+                    
+                    <div class="donation-perks">
+                        <div class="perk-item">
+                            <div class="perk-icon">
+                                <i class="fas fa-unlock"></i>
+                            </div>
+                            <div class="perk-text">
+                                <h4>Access Premium Content</h4>
+                                <p>Unlock our entire collection of premium eBooks and ePubs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="perk-item">
+                            <div class="perk-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="perk-text">
+                                <h4>Exclusive Member Tools</h4>
+                                <p>Access reading journals, notes, reading lists, and more.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="perk-item">
+                            <div class="perk-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="perk-text">
+                                <h4>Bonus Digital Perks</h4>
+                                <p>Receive wallpapers, reading trackers, and early access to new books.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="donation.html" class="btn" style="margin-top: 20px;">Donate Now</a>
+                </div>
+                
+                <div class="donation-qr">
+                    <img src="data:image/png;base64,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" alt="GCash QR Code">
+                    <p style="text-align: center; margin-top: 20px;">Scan to Donate via GCash</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials section">
+        <div class="container">
+            <h2 class="section-title">What Readers Say</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Bibliophile Hub has transformed my reading habits. The premium membership is worth every penny, with so many incredible books at my fingertips!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23A67B5B'/%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' alignment-baseline='middle' font-family='Arial, sans-serif' fill='%23FFFFFF'%3EM%3C/text%3E%3C/svg%3E" alt="Maria S.">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Maria S.</div>
+                            <div class="testimonial-role">Premium Member</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>I love the reading journal feature in the membership portal. It's helped me track my thoughts and improve my comprehension. The free eBooks selection is also fantastic!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238B7D6B'/%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' alignment-baseline='middle' font-family='Arial, sans-serif' fill='%23FFFFFF'%3EJ%3C/text%3E%3C/svg%3E" alt="James L.">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">James L.</div>
+                            <div class="testimonial-role">Teacher</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>The collection of self-help books completely changed my perspective on personal growth. I especially appreciate how easy it is to find books by topic or author.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23D2B48C'/%3E%3Ctext x='50%25' y='50%25' font-size='20' text-anchor='middle' alignment-baseline='middle' font-family='Arial, sans-serif' fill='%23FFFFFF'%3ES%3C/text%3E%3C/svg%3E" alt="Sarah K.">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Sarah K.</div>
+                            <div class="testimonial-role">Entrepreneur</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Bibliophile Hub</div>
+                    <p class="footer-about">A digital sanctuary for book lovers, offering thousands of eBooks and ePubs with tools to enhance your reading experience.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="authors.html">Browse by Author</a></li>
+                        <li><a href="topics.html">Browse by Topic</a></li>
+                        <li><a href="free-ebooks.html">Free eBooks</a></li>
+                        <li><a href="donation.html">Premium Collection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">How to Download</a></li>
+                        <li><a href="#">Reading Devices</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Copyright Notice</a></li>
+                        <li><a href="#">Donation Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Bibliophile Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

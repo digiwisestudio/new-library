@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bibliophile Hub</title>
+    <meta name="description" content="Login to your Bibliophile Hub account to access your saved books and premium content.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book-animation.css">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(166, 123, 91, 0.2);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+        
+        .auth-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        /* Notification banner styles */
+        .redirect-notification {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 0;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* Login status message styling */
+        .login-status {
+            margin-top: 1rem;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .login-status.success {
+            background-color: rgba(42, 157, 143, 0.1);
+            color: #2a9d8f;
+            display: block;
+        }
+        
+        .login-status.error {
+            background-color: rgba(230, 57, 70, 0.1);
+            color: #e63946;
+            display: block;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .notification-content i {
+            font-size: 1.2rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+  
+        
+        .decorative-book {
+            position: absolute;
+            top: 60px;
+            right: -80px;
+            transform: rotate(15deg);
+            opacity: 0.8;
+            z-index: -1;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                margin: 40px 20px;
+                padding: 30px;
+            }
+            
+            .decorative-book {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                
+                <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="topics.html">Topics</a>
+                    <a href="free-ebooks.html">Free eBooks</a>
+                    <a href="donation.html">Donate</a>
+                    <a href="login.html" class="login-btn active">Login</a>
+                    <a href="register.html" class="membership-btn btn">Join Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Redirect notification - only shown when redirected from member portal -->
+    <div class="redirect-notification" id="redirect-notice" style="display: none;">
+        <div class="container">
+            <div class="notification-content">
+                <i class="fas fa-info-circle"></i>
+                <p>Please log in to access your member portal and personalized features.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your personalized reading collection</p>
+            </div>              <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required autocomplete="email">
+                    <div class="form-feedback" id="email-feedback"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" id="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer;">
+                            <i class="far fa-eye" id="password-toggle-icon"></i>
+                        </button>
+                    </div>
+                    <div class="form-feedback" id="password-feedback"></div>
+                </div>
+                
+                <div class="auth-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" checked>
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn auth-btn" id="login-button">Sign In</button>
+            </form>
+              <div class="login-status" id="login-status"></div>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="register.html">Create Account</a></p>
+            </div>
+        </div>
+        
+        <!-- Decorative book animation -->
+        <div class="decorative-book">
+            <div class="book-container" style="transform: scale(0.6);">
+                <div class="book">
+                    <span class="shadow"></span>
+                    <div class="back"></div>
+                    <div class="cover-end"></div>
+                    <div class="page last">
+                        <button class="btn-tale">Read Me</button>
+                    </div>
+                    <div class="page third"></div>
+                    <div class="page second"></div>
+                    <div class="page first"></div>
+                    <div class="cover">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg" alt="Book Cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <h3>Bibliophile Hub</h3>
+                    <p>Your digital sanctuary for literary exploration</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="authors.html">Authors</a>
+                        <a href="topics.html">Topics</a>
+                        <a href="free-ebooks.html">Free eBooks</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Account</h4>
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Sign Up</a>
+                        <a href="#">My Collection</a>
+                        <a href="#">Reading History</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <a href="donation.html">Make a Donation</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bibliophile Hub. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.8rem;">
+                    <a href="auth-test.html" style="color: #888;">Authentication Test Page</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>    
+    <script>
+        // Check if redirected from member portal
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectFrom = urlParams.get('redirect');
+            
+            if (redirectFrom === 'member-portal') {
+                const redirectNotice = document.getElementById('redirect-notice');
+                if (redirectNotice) {
+                    redirectNotice.style.display = 'block';
+                }
+            }
+            
+            // Add login status container styling if not already present
+            const loginStatus = document.getElementById('login-status');
+            if (loginStatus) {
+                loginStatus.style.marginTop = '1rem';
+                loginStatus.style.padding = '12px';
+                loginStatus.style.borderRadius = '6px';
+                loginStatus.style.fontSize = '0.95rem';
+                loginStatus.style.textAlign = 'center';
+                loginStatus.style.display = 'none';
+            }
+            
+            // Setup password toggle functionality
+            const passwordToggle = document.getElementById('password-toggle');
+            const passwordField = document.getElementById('password');
+            const passwordToggleIcon = document.getElementById('password-toggle-icon');
+            
+            if (passwordToggle && passwordField && passwordToggleIcon) {
+                passwordToggle.addEventListener('click', function() {
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                        passwordToggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+                    } else {
+                        passwordField.type = 'password';
+                        passwordToggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

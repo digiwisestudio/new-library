@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse by Author - Bibliophile Hub</title>
+    <meta name="description" content="Browse our eBook collection by author. Find works from your favorite writers or discover new literary voices.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book-animation.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>" alt="Logo">
+                    <span class="logo-text">Bibliophile Hub</span>
+                </div>
+                
+                <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="authors.html" class="active">Authors</a>
+                    <a href="topics.html">Topics</a>
+                    <a href="free-ebooks.html">Free eBooks</a>
+                    <a href="donation.html">Donate</a>
+                    <a href="login.html" class="login-btn">Login</a>
+                    <a href="register.html" class="membership-btn btn">Join Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Browse by Author</h1>
+            <p>Explore our collection alphabetically by author name</p>
+        </div>
+    </div>
+    
+    <!-- Filter Section -->
+    <section class="section" style="padding-top: 40px; padding-bottom: 20px;">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-row authors-list">
+                    <!-- Author filter buttons will be loaded via JavaScript -->
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search by title or author...">
+                    <button class="search-btn btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Authors Books Section -->
+    <section class="section">
+        <div class="container">
+            <div class="author-books-container book-grid">
+                <!-- Books will be loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Author Section -->
+    <section class="section" style="background-color: var(--light-beige);">
+        <div class="container">
+            <h2 class="section-title">Featured Author</h2>
+            
+            <div class="featured-author" style="display: flex; gap: 30px; align-items: center; margin-top: 40px;">
+                <div class="featured-author-image" style="flex: 1; text-align: center;">
+                    <div class="book-stack">
+                        <div class="stacked-book"></div>
+                        <div class="stacked-book"></div>
+                        <div class="stacked-book"></div>
+                    </div>
+                </div>
+                <div class="featured-author-bio" style="flex: 2;">
+                    <h3>J.K. Rowling</h3>
+                    <p>J.K. Rowling is best known as the author of the seven Harry Potter books, which were published between 1997 and 2007. The enduringly popular adventures of Harry, Ron and Hermione have gone on to sell over 500 million copies, be translated into over 80 languages and made into eight blockbuster films.</p>
+                    <p>Alongside the Harry Potter series, she also wrote three short companion volumes for charity: Quidditch Through the Ages, Fantastic Beasts and Where to Find Them, and The Tales of Beedle the Bard.</p>
+                    <a href="#" class="btn">View All Books</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Membership CTA -->
+    <section class="section" style="background-color: var(--white);">
+        <div class="container" style="text-align: center;">
+            <h2>Unlock Premium Books</h2>
+            <p style="max-width: 600px; margin: 20px auto 30px;">Gain access to our entire collection, including rare and exclusive titles from your favorite authors.</p>
+            <a href="donation.html" class="btn btn-premium">Become a Member</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Bibliophile Hub</div>
+                    <p class="footer-about">A digital sanctuary for book lovers, offering thousands of eBooks and ePubs with tools to enhance your reading experience.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="authors.html">Browse by Author</a></li>
+                        <li><a href="topics.html">Browse by Topic</a></li>
+                        <li><a href="free-ebooks.html">Free eBooks</a></li>
+                        <li><a href="donation.html">Premium Collection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">How to Download</a></li>
+                        <li><a href="#">Reading Devices</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Copyright Notice</a></li>
+                        <li><a href="#">Donation Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Bibliophile Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
